@@ -1,27 +1,19 @@
 URL = "https://offset.climateneutralnow.org/footprintresult"
 
-HOUSEHOLD_1 = {
+HOUSEHOLD = {
     "HouseholdViewModel.HouseholdSize": [i for i in range(1, 13, 1)],  # from 1 to 12
     "HouseholdViewModel.SelectedResidenceCountryId": [35, 33, 45, 72, 80],  # 35=germany
-    #"HouseholdViewModel.HousingSize": [i for i in range(25, 1000, 10)],  # from 25 to 1000
+    # "HouseholdViewModel.HousingSize": [i for i in range(25, 1000, 10)],  # from 25 to 1000
     "HouseholdViewModel.SelectedHousingTypeOptionId": [1, 2, 3, 4],  # from 1 to 4
-    "HouseholdViewModel.NotKnownElectricityConsumption": [True],
-    "HouseholdViewModel.UsageLightbulbs": [True, False],
-    "HouseholdViewModel.UsageEnergyStar": [True, False],
-    "HouseholdViewModel.UsageThermostat": [True, False],
-    "HouseholdViewModel.UsageEnergySavingDevices": [True, False],
-    "HouseholdViewModel.UsageSolarWaterHeater": [True, False],
-    "HouseholdViewModel.CleanSource": [i for i in range(0, 100, 10)],
-    "HouseholdViewModel.SelectedHeatingSourceOptionId": [5, 6, 7, 8, 9, 10, 11, 12, 13],  # from 5 to 13
-}
-
-HOUSEHOLD_2 = {
-    "HouseholdViewModel.HouseholdSize": [i for i in range(1, 13, 1)],  # from 1 to 12
-    "HouseholdViewModel.SelectedResidenceCountryId": [35, 33, 45, 72, 80],  # 35=germany
-    "HouseholdViewModel.HousingSize": [i for i in range(25, 1000, 10)],  # from 25 to 1000
-    "HouseholdViewModel.SelectedHousingTypeOptionId": [1, 2, 3, 4],  # from 1 to 4
-    "HouseholdViewModel.NotKnownElectricityConsumption": [False],
+    
+    "HouseholdViewModel.NotKnownElectricityConsumption": [True, False],
     "HouseholdViewModel.ElectricityConsumption": [i for i in range(500, 1800, 200)],
+    #"HouseholdViewModel.UsageLightbulbs": [True, False],
+    #"HouseholdViewModel.UsageEnergyStar": [True, False],
+    #"HouseholdViewModel.UsageThermostat": [True, False],
+    #"HouseholdViewModel.UsageEnergySavingDevices": [True, False],
+    #"HouseholdViewModel.UsageSolarWaterHeater": [True, False],
+    
     "HouseholdViewModel.CleanSource": [i for i in range(0, 100, 10)],
     "HouseholdViewModel.SelectedHeatingSourceOptionId": [5, 6, 7, 8, 9, 10, 11, 12, 13],  # from 5 to 13
 }
@@ -76,8 +68,72 @@ LIFESTYLE = {
     "LifestyleViewModel.RecycleGlass": [True, False]
 }
 
-FORM_1 = {**HOUSEHOLD_1, **TRANSPORT, **LIFESTYLE}
-FORM_2 = {**HOUSEHOLD_2, **TRANSPORT, **LIFESTYLE}
+FORM = {**HOUSEHOLD, **TRANSPORT, **LIFESTYLE}
+
+COLUMNS = [
+    "datetime",
+    
+    "HouseholdViewModel.HouseholdSize",
+    "HouseholdViewModel.SelectedResidenceCountryId",
+    "HouseholdViewModel.HousingSize",
+    "HouseholdViewModel.SelectedHousingTypeOptionId",
+    "HouseholdViewModel.NotKnownElectricityConsumption",
+    "HouseholdViewModel.ElectricityConsumption",
+    "HouseholdViewModel.UsageLightbulbs",
+    "HouseholdViewModel.UsageEnergyStar",
+    "HouseholdViewModel.UsageThermostat",
+    "HouseholdViewModel.UsageEnergySavingDevices",
+    "HouseholdViewModel.UsageSolarWaterHeater",
+    "HouseholdViewModel.CleanSource",
+    "HouseholdViewModel.SelectedHeatingSourceOptionId",
+    
+    "TransportViewModel.Intercity",
+    "TransportViewModel.Subway",
+    "TransportViewModel.Bus",
+    "TransportViewModel.CityBus",
+    "TransportViewModel.Tram",
+    "TransportViewModel.BikeWalk",
+    "TransportViewModel.CarUsageList[0].SelectedFuelTypeOptionId",
+    "TransportViewModel.CarUsageList[0].AnnualMileage",
+    "TransportViewModel.CarUsageList[0].AverageConsumption",
+    "TransportViewModel.CarUsageList[1].SelectedFuelTypeOptionId",
+    "TransportViewModel.CarUsageList[1].AnnualMileage",
+    "TransportViewModel.CarUsageList[1].AverageConsumption",
+    "TransportViewModel.CarUsageList[2].SelectedFuelTypeOptionId",
+    "TransportViewModel.CarUsageList[2].AnnualMileage",
+    "TransportViewModel.CarUsageList[2].AverageConsumption",
+    "TransportViewModel.CarUsageList[3].SelectedFuelTypeOptionId",
+    "TransportViewModel.CarUsageList[3].AnnualMileage",
+    "TransportViewModel.CarUsageList[3].AverageConsumption",
+    "TransportViewModel.MotorbikeUsageList[0].SelectedFuelTypeOptionId",
+    "TransportViewModel.MotorbikeUsageList[0].AnnualMileage",
+    "TransportViewModel.MotorbikeUsageList[0].AverageConsumption",
+    "TransportViewModel.MotorbikeUsageList[1].SelectedFuelTypeOptionId",
+    "TransportViewModel.MotorbikeUsageList[1].AnnualMileage",
+    "TransportViewModel.MotorbikeUsageList[1].AverageConsumption",
+    "TransportViewModel.VeryLongRangeFlight",
+    "TransportViewModel.LongRangeFlight",
+    "TransportViewModel.MediumRangeFlight",
+    "TransportViewModel.ShortRangeFlight",
+    
+    "LifestyleViewModel.SelectedDietOptionId",
+    "LifestyleViewModel.SelectedLocalProductsOptionId",
+    "LifestyleViewModel.SelectedResponsibleCompaniesOptionId",
+    "LifestyleViewModel.MealsOut",
+    "LifestyleViewModel.RecycleFood",
+    "LifestyleViewModel.RecyclePaper",
+    "LifestyleViewModel.RecycleTinCans",
+    "LifestyleViewModel.RecyclePlastic",
+    "LifestyleViewModel.RecycleGlass",
+    
+    "total_annual", 
+    "country_average",
+    "world_average",
+    "household",
+    "transport",
+    "flights",
+    "lifestyle"
+]
 
 HEADERS = [{'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
     'Accept-Encoding': 'gzip, deflate, br',

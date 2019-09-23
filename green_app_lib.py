@@ -1,9 +1,10 @@
 import itertools
 import random
 import requests
-from constants import HEADERS, URL
+from constants import HEADERS, URL, COLUMNS
 from bs4 import BeautifulSoup
 import json
+import datetime
 
 def get_random_form(form_data):
     random_form = {}
@@ -15,6 +16,21 @@ def get_random_form(form_data):
         random_form["HouseholdViewModel.HousingSize"] = random.randint(25, random_form["HouseholdViewModel.HouseholdSize"] * 40)
     else:
         random_form["HouseholdViewModel.HousingSize"] = random.randint(random_form["HouseholdViewModel.HouseholdSize"] * 40, 1000)
+    # Electric consumtion
+    if random_form["HouseholdViewModel.NotKnownElectricityConsumption"] == True:
+        random_form["HouseholdViewModel.ElectricityConsumption"] = ''
+        
+        random_form["HouseholdViewModel.UsageLightbulbs"] = random.choice([True, False])
+        random_form["HouseholdViewModel.UsageEnergyStar"] = random.choice([True, False])
+        random_form["HouseholdViewModel.UsageThermostat"] = random.choice([True, False])
+        random_form["HouseholdViewModel.UsageEnergySavingDevices"] = random.choice([True, False])
+        random_form["HouseholdViewModel.UsageSolarWaterHeater"] = random.choice([True, False])
+    else:
+        random_form["HouseholdViewModel.UsageLightbulbs"] = ''
+        random_form["HouseholdViewModel.UsageEnergyStar"] = ''
+        random_form["HouseholdViewModel.UsageThermostat"] = ''
+        random_form["HouseholdViewModel.UsageEnergySavingDevices"] = ''
+        random_form["HouseholdViewModel.UsageSolarWaterHeater"] = ''
     # public transport
     intercity_subway_tram = 9
     random_form["TransportViewModel.Intercity"] = random.randint(0, 8)
@@ -27,6 +43,8 @@ def get_random_form(form_data):
     tram = subway_tram - random_form["TransportViewModel.Subway"]
     random_form["TransportViewModel.Tram"] = random.randint(0, tram)
     random_form["TransportViewModel.BikeWalk"] = random.randint(7, 14)
+    # timestamp
+    random_form["datetime"] = datetime.datetime.now()
     return random_form
 
 def get_result(form_data):
@@ -40,10 +58,14 @@ def get_result(form_data):
 
 def parse_content(page):
     soup = BeautifulSoup(page.content, "html.parser")
-
-    total_annual = soup.find('div', {'class': 'col-md-5 fp-total-annual-value'}).span.text.strip()
-    country_average = soup.find('div', {'class': 'col-md-5 fp-total-average-value'}).span.text.strip()
-    world_average = soup.find('div', {'class': 'col-md-5 fp-total-average-value'}).span.text.strip()
+    try:
+        total_annual = soup.find('div', {'class': 'col-md-5 fp-total-annual-value'}).span.text.strip()
+        country_average = soup.find('div', {'class': 'col-md-5 fp-total-average-value'}).span.text.strip()
+        world_average = soup.find('div', {'class': 'col-md-5 fp-total-average-value'}).span.text.strip()
+    except:
+        total_annual = 0
+        country_average = 0
+        world_average = 0
 
     percent_bar = soup.find('div', {'class': 'fp-allocation-container row big-allocation-view'})
     try:
@@ -76,13 +98,14 @@ def to_json_record(form, result):
 
 def to_record(form, result):
     json_record = to_json_record(form, result)
-    keys = [key for key in json_record]
-    values = [val for val in json_record.values()]
-    return ','.join(values)
+    result_array = []
+    for column in COLUMNS:
+        result_array.append(str(json_record[column]))
+    return ','.join(result_array)
 
-def write_2_file(file, json_record):
+def write_2_file(file, record):
     try:
-        file.write(json.dumps(json_record) + '\n')
+        file.write(record + '\n')
     except Exception as e:
         print(e)
 
