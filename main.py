@@ -6,8 +6,8 @@ import platform
 from multiprocessing import Pool, cpu_count
 import os 
 
-RECORDS_PER_SESSION = 100
-SESSIONS = 10
+RECORDS_PER_SESSION = 200
+SESSIONS = 16
 NBR_CPU = cpu_count()
 
 def get_filename():
