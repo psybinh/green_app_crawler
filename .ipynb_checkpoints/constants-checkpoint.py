@@ -3,7 +3,7 @@ URL = "https://offset.climateneutralnow.org/footprintresult"
 HOUSEHOLD_1 = {
     "HouseholdViewModel.HouseholdSize": [i for i in range(1, 13, 1)],  # from 1 to 12
     "HouseholdViewModel.SelectedResidenceCountryId": [35, 33, 45, 72, 80],  # 35=germany
-    "HouseholdViewModel.HousingSize": [i for i in range(25, 1000, 10)],  # from 25 to 1000
+    #"HouseholdViewModel.HousingSize": [i for i in range(25, 1000, 10)],  # from 25 to 1000
     "HouseholdViewModel.SelectedHousingTypeOptionId": [1, 2, 3, 4],  # from 1 to 4
     "HouseholdViewModel.NotKnownElectricityConsumption": [True],
     "HouseholdViewModel.UsageLightbulbs": [True, False],
@@ -27,12 +27,12 @@ HOUSEHOLD_2 = {
 }
 
 TRANSPORT = {
-    "TransportViewModel.Intercity": [i for i in range(1, 10)],  # from 0 to 100
-    "TransportViewModel.Subway": [i for i in range(1, 10)],  # from 0 to 100
-    "TransportViewModel.Bus": [i for i in range(1, 4)],  # from 0 to 100
-    "TransportViewModel.CityBus": [i for i in range(1, 4)],  # from 0 to 100
-    "TransportViewModel.Tram": [i for i in range(1, 10)],  # from 0 to 100
-    "TransportViewModel.BikeWalk": [i for i in range(7, 15)],  # from 0 to 100
+    #"TransportViewModel.Intercity": [i for i in range(1, 10)],  # from 0 to 100
+    #"TransportViewModel.Subway": [i for i in range(1, 10)],  # from 0 to 100
+    #"TransportViewModel.Bus": [i for i in range(1, 4)],  # from 0 to 100
+    #"TransportViewModel.CityBus": [i for i in range(1, 4)],  # from 0 to 100
+    #"TransportViewModel.Tram": [i for i in range(1, 10)],  # from 0 to 100
+    #"TransportViewModel.BikeWalk": [i for i in range(7, 15)],  # from 0 to 100
     
     "TransportViewModel.CarUsageList[0].SelectedFuelTypeOptionId": [15, 16, 17, 18],
     "TransportViewModel.CarUsageList[0].AnnualMileage": [i for i in range(10000, 16000, 1000)],
@@ -58,17 +58,17 @@ TRANSPORT = {
     "TransportViewModel.MotorbikeUsageList[1].AnnualMileage": [i for i in range(10000, 16000, 1000)],
     "TransportViewModel.MotorbikeUsageList[1].AverageConsumption": [3, 4],
     
-    "TransportViewModel.VeryLongRangeFlight": [i for i in range(0, 3)],  # from 0 to 100
-    "TransportViewModel.LongRangeFlight": [i for i in range(0, 3)],  # from 0 to 120
-    "TransportViewModel.MediumRangeFlight": [i for i in range(0, 3)],  # from 0 to 120
-    "TransportViewModel.ShortRangeFlight": [i for i in range(0, 5)],  # from 0 to 120
+    "TransportViewModel.VeryLongRangeFlight": [0, 0, 0, 0, 0, 1, 1, 1, 1, 2],
+    "TransportViewModel.LongRangeFlight": [0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3],
+    "TransportViewModel.MediumRangeFlight": [i for i in range(0, 4)],
+    "TransportViewModel.ShortRangeFlight": [0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5],
 }
 
 LIFESTYLE = {
     "LifestyleViewModel.SelectedDietOptionId": [19, 20, 21, 22, 23],  # from 19 to 23
     "LifestyleViewModel.SelectedLocalProductsOptionId": [24, 25, 26],  # from 24 to 26
     "LifestyleViewModel.SelectedResponsibleCompaniesOptionId": [28, 29, 30],  # from 28 to 30
-    "LifestyleViewModel.MealsOut": [i for i in range(0, 5)],  # from 0 to 100
+    "LifestyleViewModel.MealsOut": [0, 0, 0, 0, 1, 2, 3, 4, 5, 6],
     "LifestyleViewModel.RecycleFood": [True, False],
     "LifestyleViewModel.RecyclePaper": [True, False],
     "LifestyleViewModel.RecycleTinCans": [True, False],
@@ -78,20 +78,6 @@ LIFESTYLE = {
 
 FORM_1 = {**HOUSEHOLD_1, **TRANSPORT, **LIFESTYLE}
 FORM_2 = {**HOUSEHOLD_2, **TRANSPORT, **LIFESTYLE}
-
-HEADERS1 = {
-    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
-    'Accept-Encoding': 'gzip, deflate, br',
-    'Cache-Control': 'max-age=0',
-    'Connection': 'keep-alive',
-    'Content-Type': 'application/x-www-form-urlencoded',
-    'DNT': '1',
-    'Host': 'offset.climateneutralnow.org',
-    'Origin': 'https://offset.climateneutralnow.org',
-    'Referer': 'https://offset.climateneutralnow.org/footprintcalc',
-    'Upgrade-Insecure-Requests': '1',
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36',
-}
 
 HEADERS = [{'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
     'Accept-Encoding': 'gzip, deflate, br',
