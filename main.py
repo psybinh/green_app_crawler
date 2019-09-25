@@ -52,7 +52,7 @@ if __name__ == '__main__':
                 if record != None:
                     write_2_file(file, record)
             file.close()
-    s3_uploader.upload(filename, Key=filename)
+    s3_uploader.upload(filename, filename)
     toc = time.time()
     print('time: ' + str(toc - tic))
             
