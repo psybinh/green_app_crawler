@@ -4,10 +4,11 @@ import requests
 import time
 import platform
 from multiprocessing import Pool, cpu_count
-import os 
+import os
+from s3_lib import S3Uploader
 
-RECORDS_PER_SESSION = 200
-SESSIONS = 16
+RECORDS_PER_SESSION = 100
+SESSIONS = 1
 NBR_CPU = cpu_count()
 
 def get_filename():
@@ -41,6 +42,7 @@ def get_record(form):
 if __name__ == '__main__':
     filename = get_filename()
     tic = time.time()
+    s3_uploader = S3Uploader()
     for i in range(SESSIONS):
         forms = [get_form() for i in range(RECORDS_PER_SESSION)]
         with open(filename, 'a', encoding='utf-8') as file:
@@ -50,6 +52,7 @@ if __name__ == '__main__':
                 if record != None:
                     write_2_file(file, record)
             file.close()
+    s3_uploader.upload(filename, Key=filename)
     toc = time.time()
     print('time: ' + str(toc - tic))
             
