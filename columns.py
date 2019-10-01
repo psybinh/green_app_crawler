@@ -1,6 +1,7 @@
 COLUMNS = [
     "hashed_id",
     "datetime",
+    "square_meter_per_person",
     
     "HouseholdViewModel.HouseholdSize",
     "HouseholdViewModel.SelectedResidenceCountryId",

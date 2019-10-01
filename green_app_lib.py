@@ -64,22 +64,22 @@ def parse_content(page):
 
     percent_bar = soup.find('div', {'class': 'fp-allocation-container row big-allocation-view'})
     try:
-        household = percent_bar.find('div', {'class': 'household'}).find('div', class_='fp-allocation-text').text.strip()
+        household = percent_bar.find('div', {'class': 'household'}).find('div', class_='fp-allocation-text').text.strip()[:-1]
     except Exception as e:
         print(e)
         household = 0
     try:
-        transport = percent_bar.find('div', {'class': 'transport'}).find('div', class_='fp-allocation-text').text.strip()
+        transport = percent_bar.find('div', {'class': 'transport'}).find('div', class_='fp-allocation-text').text.strip()[:-1]
     except Exception as e:
         print(e)
         transport = 0
     try:
-        flights = percent_bar.find('div', {'class': 'flights'}).find('div', class_='fp-allocation-text').text.strip()
+        flights = percent_bar.find('div', {'class': 'flights'}).find('div', class_='fp-allocation-text').text.strip()[:-1]
     except Exception as e:
         print(e)
         flights = 0
     try:
-        lifestyle = percent_bar.find('div', {'class': 'lifestyle'}).find('div', class_='fp-allocation-text').text.strip()
+        lifestyle = percent_bar.find('div', {'class': 'lifestyle'}).find('div', class_='fp-allocation-text').text.strip()[:-1]
     except Exception as e:
         print(e)
         lifestyle = 0
@@ -105,13 +105,11 @@ def to_record(form, result):
         else:
             hashing_values.append('')
     hashing_string = ','.join(hashing_values)
-    #print(hashing_string)
-    hashed_int = hash(hashing_string)
-    
-    json_record["hashed_id"] = hashed_int
+    json_record["hashed_id"] = str(hash(hashing_string))
     # datetime
     json_record["datetime"] = datetime.now()
-    
+    # square meter per person 
+    json_record["square_meter_per_person"] = json_record['HouseholdViewModel.HousingSize'] / json_record['HouseholdViewModel.HouseholdSize']
     result_array = []
     for column in COLUMNS:
         if column in json_record:
