@@ -44,7 +44,7 @@ def get_random_form(form_data):
 def get_result(form_data):
     headers = random.choice(HEADERS)
     try:
-        page = requests.post(URL, data=form_data, headers=headers)
+        page = requests.post(URL, data=form_data, headers=headers, timeout=120)
     except Exception as e:
         page = None
         print(e)
